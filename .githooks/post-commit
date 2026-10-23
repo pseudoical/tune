@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eu
+
+[ -e ".commit" ] || exit 0
+
+rm ".commit"
+
+VERSION=$(node -p "require('./package.json').version")
+
+[ "$VERSION" = "0.0.0" ] && exit 0
+
+if [ -z "$(git tag -l "v$VERSION")" ]; then
+    touch ".amend"
+    trap 'rm -f .amend' EXIT
+
+    npm run readme
+
+    git add package.json package-lock.json README.md
+    git commit --amend -C HEAD --no-verify
+    git tag "v$VERSION"
+fi

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eu
+
+[ -e ".amend" ] && exit 0
+
+SUBJECT=$(head -n 1 "$1")
+
+case "$SUBJECT" in
+    feat!:*)
+        BUMP=major
+        ;;
+    feat:*)
+        BUMP=minor
+        ;;
+    fix:*|refactor:*|optimize:*)
+        BUMP=patch
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+
+npm version --no-commit-hooks --no-git-tag-version "$BUMP"
