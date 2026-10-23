@@ -1,0 +1,23 @@
+{
+  "name": "Tune",
+  "version": "1.0.0",
+  "description": "A JavaScript UI kit for configuring Three.js shader uniforms through a graphical interface.",
+  "license": "MIT",
+  "author": "pseudoical",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "scripts": {
+    "start": "npm run readme & npm run dist & npm run docs & wait",
+    "dist": "node ./scripts/dist.mjs",
+    "docs": "node ./scripts/docs.mjs",
+    "readme": "node ./scripts/readme.mjs",
+    "version": "",
+    "postversion": "git update-index --again",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "terser": "^5.51.2",
+    "typedoc": "^0.28.20",
+    "typedoc-plugin-markdown": "^4.14.0"
+  }
+}

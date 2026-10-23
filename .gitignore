@@ -1,0 +1,5 @@
+.amend
+.commit
+docs/README.md
+docs/TuneControl.md
+node_modules/
