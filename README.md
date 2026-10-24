@@ -8,6 +8,8 @@
 
 - [API reference](#api-reference)
 - [Quick start](#quick-start)
+  - [Asynchronous load](#asynchronous-load)
+  - [Synchronous load](#synchronous-load)
   - [Userscript usage](#userscript-usage)
   - [Version control](#version-control)
 - [Full example](#full-example)
@@ -23,6 +25,8 @@ A complete overview of the public API, including the constructor signature, cont
 - [docs/Tune.md](docs/Tune.md)
 
 # Quick start
+
+## Asynchronous load
 
 ```js
 const script = document.head.appendChild(document.createElement("script"));
@@ -40,6 +44,27 @@ script.onload = () => {
 
     gui.menu();
 };
+```
+
+## Synchronous load
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://cdn.jsdelivr.net/gh/pseudoical/tune@1.0.0/dist/tune.min.js", false);
+xhr.send(null);
+
+const script = document.head.appendChild(document.createElement("script"));
+script.textContent = xhr.responseText;
+
+const gui = new window.Tune({
+    storageVersion: "1",
+    title: "My Menu",
+    scriptVersion: "1.2.3",
+    author: "John Doe",
+    url: "https://example.com",
+});
+
+gui.menu();
 ```
 
 ## Userscript usage
